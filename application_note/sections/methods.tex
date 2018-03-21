@@ -1,0 +1,25 @@
+\section{Methods}
+The \textsf{seeds} package provides two distinct ways to compute systematic errors. Both make 
+use of the Hamilton formalism, a convenient tool in dynamic optimization. 
+As a setup for the DEN you must provide
+\begin{enumerate}
+	\item a mathematical model $f$ of the dynamic system,
+	\item an observation function $h$,
+	\item measured data $y^\text{obs}$. 
+\end{enumerate}
+The \textsf{greedyseeds} method is a deterministic algorithm based on a dynamic version of the 
+method of steepest descent, combined with a "greedy" selection process to archive a sparse 
+solution. In addition to the systems equations it is possible to constrain the system to the 
+solution space of algebraic equations, e.g. mass conservation. In particular the case
+\begin{equation}
+	\frac{\partial f_i}{\partial x_i} = 0 \quad ,
+\end{equation} 
+where the index is understood as the $i$-th component, may lead to certain numerical 
+difficulties and highly benefits of such an algebraic constraint.
+\\
+
+The \textsf{bayesianseeds} method is a stochastic algorithm based on ideas of bayesian 
+inference and uses LASSO regularization to generate sparsity of the solution \cite{BDEN}. 
+In addition to 
+a specific estimate of the unknown inputs it results in a probability density in the 
+space of unknown input functions.

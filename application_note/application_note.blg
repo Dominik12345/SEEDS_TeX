@@ -1,0 +1,15 @@
+[0] Config.pm:302> INFO - This is Biber 2.8
+[0] Config.pm:305> INFO - Logfile is 'application_note.blg'
+[38] biber-MSWIN64:313> INFO - === 
+[65] Biber.pm:361> INFO - Reading 'application_note.bcf'
+[162] Biber.pm:847> INFO - Found 2 citekeys in bib section 0
+[180] Biber.pm:3971> INFO - Processing section 0
+[196] Biber.pm:4144> INFO - Looking for bibtex format file '../bib/bibfile.bib' for section 0
+[199] bibtex.pm:1449> INFO - Decoding LaTeX character macros into UTF-8
+[208] bibtex.pm:1305> INFO - Found BibTeX data source '../bib/bibfile.bib'
+[235] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[235] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[235] Biber.pm:3799> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[236] Biber.pm:3805> INFO - No sort tailoring available for locale 'en-US'
+[239] bbl.pm:613> INFO - Writing 'application_note.bbl' with encoding 'UTF-8'
+[241] bbl.pm:716> INFO - Output to application_note.bbl

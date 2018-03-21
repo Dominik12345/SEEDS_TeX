@@ -1,0 +1,22 @@
+\section{Introduction}
+Cell biology, chemical reactions and mechanical systems are just some examples of 
+processes that can be modelled and investigated using dynamic systems. In the mathematical 
+formulation these take the form
+\begin{equation}
+	\dot{x}(t) = f\left(x(t),u(t)\right) \label{eq:f}
+\end{equation}
+where $x(t)$ is the state of the system at time $t$, $u(t)$ is a known, time-dependent input and 
+$f$ is a mathematical model of the system. In addition it is in most cases not possible 
+to measure the system state $x$ directly, but only observables $y$ via a observation function 
+\begin{equation}
+y(t) = h\left(x(t)\right) \quad . \label{eq:h}
+\end{equation}
+It is more often the rule than the exception, that measurements $y^\text{obs}$ and predictions 
+of \eqref{eq:f} and \eqref{eq:h} do not satisfactorily coincide. If the discrepancies are due 
+to stochastic processes or measurement noise, the known methods using varieties of Kalman 
+Filters and Particle Filters, to name a few, will be able to reconstruct the states $x(t)$ 
+given the data $y^\text{obs}$. As soon as the model $f$ contains systematic errors, such as 
+unknown interactions, these methods tend to fail or become very unstable. The \textsc{Dynamic 
+Elastic Net} (DEN)\cite{DEN} is a dynamic optimization procedure that handles systematic model 
+errors as unknown inputs to the systems equations. The methods provided by \textsf{seeds} are 
+able to optimize the unknown inputs such to archive a satisfactory fit to given data. 

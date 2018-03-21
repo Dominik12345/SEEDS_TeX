@@ -1,0 +1,105 @@
+% article with standard layout
+\documentclass{beamer}
+\usetheme{Darmstadt}
+
+% fancy progress bar
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\definecolor{pbblue}{HTML}{0A75A8}% filling color for the progress bar
+\definecolor{pbgray}{HTML}{575757}% background color for the progress bar
+
+\makeatletter
+\def\progressbar@progressbar{} % the progress bar
+\newcount\progressbar@tmpcounta% auxiliary counter
+\newcount\progressbar@tmpcountb% auxiliary counter
+\newdimen\progressbar@pbht %progressbar height
+\newdimen\progressbar@pbwd %progressbar width
+\newdimen\progressbar@tmpdim % auxiliary dimension
+
+\progressbar@pbwd=\linewidth
+\progressbar@pbht=1.5ex
+
+% the progress bar
+\def\progressbar@progressbar{%
+
+    \progressbar@tmpcounta=\insertframenumber
+    \progressbar@tmpcountb=\inserttotalframenumber
+    \progressbar@tmpdim=\progressbar@pbwd
+    \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+    \divide\progressbar@tmpdim by \progressbar@tmpcountb
+
+  \begin{tikzpicture}[rounded corners=2pt,very thin]
+
+    \shade[top color=pbgray!20,bottom color=pbgray!20,middle color=pbgray!50]
+      (0pt, 0pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
+
+      \shade[draw=pbblue,top color=pbblue!50,bottom color=pbblue!50,middle color=pbblue] %
+        (0pt, 0pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
+
+    \draw[color=normal text.fg!50]  
+      (0pt, 0pt) rectangle (\progressbar@pbwd, \progressbar@pbht) 
+        node[pos=0.5,color=normal text.fg] {\textnormal{%
+             \pgfmathparse{\insertframenumber*100/\inserttotalframenumber}%
+             \pgfmathprintnumber[fixed,precision=2]{\pgfmathresult}\,\%%
+        }%
+    };
+  \end{tikzpicture}%
+}
+
+\addtobeamertemplate{footline}{}
+{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=4ex,center,dp=1ex]{white}%
+    \progressbar@progressbar%
+  \end{beamercolorbox}%
+}
+\makeatother
+
+
+
+
+
+%encoding text
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+
+%biblilatlateography package
+\usepackage{csquotes}
+\usepackage[backend = biber]{biblatex} 
+
+
+
+% fonds
+\usepackage[T1]{fontenc}
+\usefonttheme{professionalfonts} % using non standard fonts for beamer
+\usefonttheme{serif} % default family is serif
+%\setmainfont{Liberation Serif}
+
+\usepackage{upgreek}
+
+% math formulas
+\usepackage{amsmath}	% standard math equations
+%\usepackage[fleqn]{amsmath} % left aligned equations
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}		% theorem environments
+\usepackage{nicefrac}	% make nicefracs ( 1/2 with smaller slash )
+
+% math fond
+\usepackage{fourier}
+
+% fancy layout
+\usepackage{tcolorbox}
+
+%graphics
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{pgfplots} % to simply input matplotlib results
+
+%tables
+\usepackage{booktabs}
+
+%layout
+\setlength{\parindent}{0pt}
+\beamertemplatenavigationsymbolsempty %gets rid of navigation symbols
+%\setbeamertemplate{footline}{}  %gets rid of bottom navigation bars
