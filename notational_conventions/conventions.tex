@@ -1,0 +1,80 @@
+\input{../header/simple_header.tex}
+
+\begin{document}
+
+\begin{enumerate}
+\item A dynamic system 
+	\begin{equation}\begin{aligned}
+	\dot{x} = f(x,u) \\
+	y = h(x)
+	\end{aligned}\end{equation}
+	where
+	\begin{enumerate}
+	\item $[0,T]$ is an interval of time and $t\in[0,T]$. 
+	\item $x:[0,T]\to \mathbb{R}^n$ is called \textit{state trajectory}.
+	\item $\dot{x}=\frac{\text{d}x}{\text{d}t}$ denotes the derivative with respect to time.
+	\item $u:[0,T]\to \mathbb{R}^{m'}$ is called \textit{known input}.
+	\item $f$ is called right hand side of the system equation or simply \textit{model}.
+	\item $h:\mathbb{R}^n\to \mathbb{R}^p$ is called \textit{observation function}.
+	\item $y$ is called \textit{observable}.
+	\item $n$ is the dimension of the state space, $p$ is the dimension of the observation 
+		space.
+	\item For the sake of readability $x$ denotes $x(t)$ whenever necessary.
+	\end{enumerate}
+	The space of all possible states is called \textit{state space}.
+\item If we assume a true model we write 
+	\begin{enumerate}
+	\item	$f^\text{true}$ and $x^\text{true}$.
+	\item	$y^\text{obs}$ is the \textit{observation data}.
+	\item	$f$ is called the \textit{nominal model} and $f^\text{true}$ the \textit{true 
+	model}.
+	\item  $f^\text{true}(x(t),u(t))-f(x(t),u(t))=:w(t)$ where $w$ is called 
+		\textit{model error} or \textit{hidden input}. The space of admissible hidden inputs 
+		is $\Omega \subseteq \mathbb{R}^m$.
+	\end{enumerate}
+	
+\item The \textit{dynamic elastic net (DEN)} reads
+	\begin{equation} \begin{aligned}
+		\hat{w}^\text{opt} &:= \underset{\hat{w}\in \Omega}{\text{arg min } } J \\
+		\text{subject to} \\
+		J&:= ||y^\text{obs}-h(\hat{x})||_{L_2}^2 + \alpha_1 ||\hat{w}||_{L_1} 
+		+ \frac{\alpha_2}{2}||\hat{w}||^2_{L_2} \\
+		\dot{\hat{x}} &= f(\hat{x},u) + \hat{w} \quad , \quad x(0) = x_0
+	\end{aligned}\end{equation}
+	and $\hat{x}^\text{opt}$ the predicted states according to $\hat{w}^\text{opt}$. 
+	Furthermore $\hat{y}^\text{opt}=h(\hat{x})$.
+	
+\item Spline regularization,
+	\begin{enumerate}
+	\item We define $\chi_1 := x$, $\chi_2:=w$ and $\chi_3:=\dot{w}$ or
+		$\xi:=w$ and $\eta=\dot{w}$.
+	\item The \textit{augmented state} is
+		\begin{equation}
+			\chi := \begin{pmatrix}
+			\chi_1 \\ \chi_2 \\ \chi_3 
+			\end{pmatrix} = \begin{pmatrix}
+			x \\ \xi \\ \eta 
+			\end{pmatrix}  
+		\end{equation}
+	\item 
+		\begin{equation}
+			F(\chi) := \begin{pmatrix}
+			f(\chi_1,u)+ \chi_2 \\ \chi_3 \\ 0
+			\end{pmatrix}
+		\end{equation}
+	\end{enumerate}
+
+	The augmented DEN reads
+	\begin{equation} \begin{aligned}
+		\hat{\vartheta}^\text{opt} &:= \underset{\hat{\vartheta}\in 
+		\mathbb{R}^m}{\text{arg min } } J \\
+		\text{subject to} \\
+		J&:= ||y^\text{obs}-h(\hat{\chi}_1)||_{L_2}^2 + \alpha_1 ||\hat{\chi}_2||_{L_1} 
+		+ \frac{\alpha_2}{2}||\hat{\vartheta}||^2_{L_2} \\
+		\dot{\hat{\chi}} &= F(\hat{\chi}) + \begin{pmatrix}
+		0 \\ 0 \\ \vartheta  
+		\end{pmatrix}\quad , \quad  \hat{\chi}(0) = \chi_0 \quad .
+	\end{aligned}\end{equation}
+\end{enumerate}
+
+\end{document}
