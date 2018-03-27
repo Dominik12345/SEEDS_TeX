@@ -39,7 +39,7 @@
 		\text{subject to} \\
 		J&:= ||y^\text{obs}-h(\hat{x})||_{L_2}^2 + \alpha_1 ||\hat{w}||_{L_1} 
 		+ \frac{\alpha_2}{2}||\hat{w}||^2_{L_2} \\
-		\dot{\hat{x}} &= f(\hat{x},u) + \hat{w} \quad , \quad x(0) = x_0
+		\dot{\hat{x}} &= f(\hat{x},u) + \hat{w} \quad , \quad \hat{x}(0) = x_0
 	\end{aligned}\end{equation}
 	and $\hat{x}^\text{opt}$ the predicted states according to $\hat{w}^\text{opt}$. 
 	Furthermore $\hat{y}^\text{opt}=h(\hat{x})$.
@@ -75,6 +75,27 @@
 		0 \\ 0 \\ \vartheta  
 		\end{pmatrix}\quad , \quad  \hat{\chi}(0) = \chi_0 \quad .
 	\end{aligned}\end{equation}
+
+\item Mathematical notations
+	\begin{enumerate}
+	\item The gradient of a function $f:\mathbb{R}^n\to\mathbb{R}$ can be written as column 
+	or row vector,
+		\begin{equation}
+			\frac{\partial f}{\partial x} = \begin{pmatrix}
+			\frac{\partial f}{\partial x_1} \\ \vdots \\ \frac{\partial f}{\partial x_n} 
+			\end{pmatrix} \quad \text{and} \quad \nabla f = 
+			 \begin{pmatrix}
+			\frac{\partial f}{\partial x_1}, & \hdots &, \frac{\partial f}{\partial x_n}  
+			\end{pmatrix}  \quad .
+		\end{equation}
+	\item The Jacobian of a function $f:\mathbb{R}^n \to \mathbb{R}^m$ in $x$
+		\begin{equation}
+		\left. \frac{\partial f}{\partial x} \right|_{x} = \begin{pmatrix}
+		\nabla f_1 \\ \vdots \\ \nabla f_m
+		\end{pmatrix}		 
+		\end{equation}
+	\end{enumerate}
+
 \end{enumerate}
 
 \end{document}
