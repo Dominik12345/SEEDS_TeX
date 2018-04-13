@@ -1,0 +1,146 @@
+\section{Example Systems}
+
+	\subsection*{Circle}
+	Consider the dynamic system depicted in figure \ref{fig:Circle}
+	\begin{equation}\left\{ \begin{aligned}
+	\dot{x}_1 &= -a_1 x_1 + b_3 x_3 \\ 
+	\dot{x}_2 &= -a_2 x_2 + b_1 x_1 \\ 
+	\dot{x}_2 &= -a_3 x_3 + b_2 x_2
+	\end{aligned} \right.
+	\quad , \quad x_i(0) = x_{i,0} \quad i=1,2,3	
+	\label{Circle:eq:model}\end{equation}
+	with positive parameters $a_1,\ldots,b_3$ and initial values $x_{i,0}$.
+	\input{figures/Circle.tex}
+	Depending on the magnitude of the parameters, the system could show different 
+	qualitative behaviours, it could be
+	\begin{enumerate}
+	\item stable $|x_i(t) - x_i^*| \to 0 $ as $t\to \infty$ with a fix point $x_i^*$,
+	\item periodic $x_i(t)= x_i(t+T)$ with a constant $T$,
+	\item unstable $x_i(t) \to \infty$ as $t\to\infty$ or
+	\item chaotic. 
+	\end{enumerate}
+	If we want to to use this system as a simplified version of a real system, e.g. 
+	the JAK-STAT pathway \cite{DEN}, we should adjust the parameters in such a way, that 
+	the model \eqref{Circle:eq:model} shows a realistic behaviour before we simulate 
+	data.\\
+	
+	\paragraph*{Classical Equilibration}
+	The first step in finding a stable behaviour is to compute the fixed points of 
+	the system, i.e. $x^*_i$ such that $\dot{x}_i=0$. From \eqref{Circle:eq:model} we
+	deduce the homogeneous linear equation system
+	\begin{equation}0 = A x \quad \text{where} \quad 
+	\begin{pmatrix}
+	-a_1 & 0 & b_3 \\ b_1 &-a_2 & 0 \\ 0 & b_2 & -a_3 
+	\end{pmatrix} \quad ,
+	\end{equation}
+	and we know that $\dim \ker A = 0$ if and only if $\det A =0$. 
+	So we compute
+	\begin{equation}
+	\det A = -a_1a_2a_3 + b_1 b_2 b_3
+	\end{equation}
+	to get: System \eqref{fig:Circle} has only the trivial fixed point $x_i^*=0$, if
+	\begin{equation}
+	a_1a_2a_3 \neq b_1 b_2 b_3 \quad .
+	\end{equation}
+	In the case $a_1a_2a_3=b_1b_2b_3$ we get an $1$-dimensional equilibrium manifold
+	\begin{equation}
+	\ker A = \text{span}\left\{\,\begin{pmatrix}
+	b_2 \\ b_1 b_2 \\ a_1 a_2
+	\end{pmatrix} \, \right\} \quad .
+	\end{equation}
+	
+	\paragraph*{Tropical Equilibration}
+	Now we try to adjust the parameters such that we obtain a approximately stable 
+	system using tropical methods \cite{Trop}.\\
+	
+	Choose a small $1>> \epsilon > 0$ and define normalized parameters (the notation is 
+	always understood as $i=1,2,3$)  
+	$\tilde{a}_i$ and $\tilde{b}_i$ via
+	\begin{equation}\begin{aligned}
+	a_1&=\tilde{a}_1 \epsilon^{\gamma_1} \quad , \quad 
+	a_2=\tilde{a}_2 \epsilon^{\gamma_2}\quad , \quad 
+	a_3=\tilde{a}_3 \epsilon^{\gamma_3}\quad , \quad  \\
+	b_1&=\tilde{b}_1 \epsilon^{\gamma_4} \quad , \quad 
+	b_2=\tilde{b}_2 \epsilon^{\gamma_5}\quad , \quad 
+	b_3=\tilde{b}_3 \epsilon^{\gamma_6}
+	\end{aligned}
+	\end{equation}	 
+	and normalized state variables $\tilde{x}_i$
+	\begin{equation}
+	x_1=\tilde{x}_1 \epsilon^{\delta_1} \quad , \quad 
+	x_2=\tilde{x}_2 \epsilon^{\delta_2}\quad , \quad 
+	x_3=\tilde{x}_3 \epsilon^{\delta_3} \quad ,
+	\end{equation}
+	such that
+	\begin{enumerate}
+	\item the normalized parameters and variables are of order one\\ 
+	$\mathcal{O}(\tilde{a}_i)=\mathcal{O}(\tilde{b}_i)=
+	\mathcal{O}(\tilde{x}_i)=\mathcal{O}(1)$ and
+	\item the powers are integers $\gamma_i,\delta_i\in \mathbb{Z}$.
+	\end{enumerate}
+	Note, that in theory we can perform the limit $\epsilon \to 0$ to get
+	\begin{equation}
+		\lim\limits_{\epsilon \to 0} \tilde{a}_i = \lim\limits_{\epsilon \to 0} 
+		\tilde{b}_i = \lim\limits_{\epsilon \to 0} \tilde{x}_i = 1 \quad .
+	\end{equation}
+	
+	We now want to express \eqref{Circle:eq:model} in terms of the normalized parameters 
+	and variables. We see that ($i=2,3$ analogous)
+	\begin{equation} 
+	\left.\begin{aligned}
+	\dot{x}_1 &= \dot{\tilde{x}}_1 \epsilon^{\delta_1} \\
+	-a_1 x_1 + b_3 x_3 &= -  \tilde{a}_1\tilde{x}_1 \epsilon^{\gamma_1+\delta_1} +
+	 \tilde{b}_3 \tilde{x}_3 
+	\epsilon^{\gamma_6-\delta_3}	
+	 \end{aligned} \right\} \quad \Rightarrow \quad 
+	 \dot{\tilde{x}}_1 = 
+	 -  \tilde{a}_1\tilde{x}_1 \epsilon^{\gamma_1} +
+	 \tilde{b}_3 \tilde{x}_3 
+	\epsilon^{\gamma_6+\delta_3-\delta_1}	\label{Circle:eq:normalizedsystem}
+	\end{equation}
+	and we note that since $0<\epsilon << 1$ the leading summands of 
+	\eqref{Circle:eq:normalizedsystem} are those with the smallest power of $\epsilon$.  
+	Now tropical equilibration means, we have to find a parameters, such that 
+	\begin{enumerate}
+	\item the minimal power of $\epsilon$ appears in two summands and 
+	\label{Circle:enum_1}
+	\item these two leading summands have opposite signs.\label{Circle:enum_2}
+	\end{enumerate}
+	Now by definition of tropical algebra, \ref{Circle:enum_1}. is just finding the 
+	simultaneous tropical roots of
+	\begin{equation}\begin{aligned}
+		\gamma_1 \oplus \gamma_6 \otimes \delta_3 \otimes (-\delta_1) &= 0 \\
+		\gamma_2 \oplus \gamma_4 \otimes \delta_1 \otimes (-\delta_2) &= 0 \\
+		\gamma_3 \oplus \gamma_5 \otimes \delta_2 \otimes (-\delta_3) &= 0
+	\end{aligned} \label{Circle:eq:tropVar}
+	\end{equation}
+	or in other words with $f_1(\gamma_1,\ldots,\delta_3) := \gamma_1 \oplus 
+	\gamma_6\otimes\delta_3\otimes(-\delta_1)$, $f_2$ and $f_3$ analogous, we have to 	
+	compute the tropical variety
+	\begin{equation}
+		V (f_1,f_2,f_3) \quad .
+	\end{equation}
+	In this specific case the situation is quiet easy because in 
+	\eqref{Circle:eq:normalizedsystem} we only have two summands with opposite signs. 
+	Thus the whole tropical variety also fulfils \ref{Circle:enum_2}. Addition 
+	of the three equations of \eqref{Circle:eq:tropVar} shows
+	\begin{equation}
+	V(f_1,f_2,f_3) \subseteq
+	\left\{\gamma_1,\ldots,\delta_3 \in\mathbb{Z} \big|
+	\gamma_1+\gamma_2 + \gamma_3 = \gamma_4 + \gamma_5 + \gamma_6 \right\} \quad .
+	\end{equation}
+	To interpret these results in the nontropical world we apply the exponential 
+	function and multiply with $\tilde{a}_i$ and $\tilde{b}_i$ (which are all 
+	approximately $1$). This yields
+	\begin{align}
+	\tilde{a}_1\tilde{a}_2\tilde{a}_3 \epsilon^{\gamma_1+\gamma_2+\gamma_3} &=
+	\tilde{b}_1\tilde{b}_2\tilde{b}_3 \epsilon^{\gamma_4+\gamma_5+\gamma_6} \notag \\
+	\tilde{a}_1\epsilon^{\gamma_1}\tilde{a}_2\epsilon^{\gamma_2}
+	\tilde{a}_3\epsilon^{\gamma_3} &=	\tilde{b}_1\epsilon^{\gamma_4} \notag
+	\tilde{b}_2\epsilon^{\gamma_5}\tilde{b}_3\epsilon^{\gamma_6}\\
+	a_1a_2a_3 &= b_1b_2b_3 \quad .
+	\end{align}
+	
+	We found, that in this example, tropical equilibration leads exactly to 
+	those parameter sets, that have a nontrivial classical equilibrium manifold.
+	
