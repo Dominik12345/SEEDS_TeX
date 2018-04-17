@@ -37,3 +37,5 @@ observables = { 'y1' : 'x1' ,
 
 functions = {
 }
+
+# Algebraic Constraints
