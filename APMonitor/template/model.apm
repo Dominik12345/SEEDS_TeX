@@ -1,0 +1,53 @@
+Model
+
+	Parameters
+		a1 = 0.2
+		a2 = 0.2
+		a3 = 0.2
+		b1 = 0.1
+		b2 = 0.2
+		b3 = 0.1
+
+		!apm stuff
+		alpha1 = 0.1
+		alpha2 = 0.1
+		last
+		y1obs
+		y2obs
+		xi1
+		xi2
+		eta1
+		eta2
+		theta1
+		theta2
+	End Parameters
+
+	Variables
+		J = 0
+
+		x1 = 1
+		x2 = 2
+		x3 = 4
+
+		y1 = x1 +  x2
+		y2 = x2 +  x3
+	End Variables
+
+	Equations
+		minimize last * J
+		$J = (y1obs - y1)**2 + (y2obs - y2)**2 + alpha2/2. * (theta1)**2 + alpha2/2. * (theta2)**2
+
+		$x1 = -a1 * x1 + b3 * x3 + xi1
+		$x2 = -a2 * x2 + b1 * x1 + xi2
+		$x3 = -a3 * x3 + b2 * x2
+
+		$xi1 = eta1
+		$eta1 = theta1
+		$xi2 = eta2
+		$eta2 = theta2
+
+		y1 = x1 +  x2
+		y2 = x2 +  x3
+	End Equations
+
+End Model
