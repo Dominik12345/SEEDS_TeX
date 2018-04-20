@@ -1,0 +1,56 @@
+Model
+
+	Parameters
+		k1 = 2.041737944669529
+		k2 = 0.1
+		k3 = 0.32359365692962827
+		k4 = 2.6302679918953817
+		s1 = 0.6165950018614822
+		s2 = 0.457088189614875
+		N = 2.041737944669529
+
+		!apm stuff
+		alpha1 = 0.1
+		alpha2 = 0.1
+		last
+		y1obs
+		y2obs
+		w1
+		w2
+		w3
+		w4
+	End Parameters
+
+	Variables
+		J = 0
+
+		x1 = 10**(0.31)
+		x2 = 0
+		x3 = 0
+		x4 = 0
+
+		y1 = s1 * (x2 + 2 * x3)
+		y2 = s2 * (x1 + x2 + 2 * x3)
+	End Variables
+
+	Connections
+		p(1).n(1).w1 = CALCULATED
+		p(1).n(1).w2 = CALCULATED
+		p(1).n(1).w3 = CALCULATED
+		p(1).n(1).w4 = CALCULATED
+	End Connections
+
+	Equations
+		minimize last * J
+		$J = (y1obs - y1)**2 + (y2obs - y2)**2 + alpha1 * abs(w1) + alpha2/2. * (w1)**2 + alpha1 * abs(w2) + alpha2/2. * (w2)**2 + alpha1 * abs(w3) + alpha2/2. * (w3)**2 + alpha1 * abs(w4) + alpha2/2. * (w4)**2
+
+		$x1 = -k1 * x1 + w1
+		$x2 = k1 * x1 - k2 * x2^2 + w2
+		$x3 = -k3 * x3 + 0.5 * k2 * x2^2 + w3
+		$x4 = k3 * x3 + w4
+
+		y1 = s1 * (x2 + 2 * x3)
+		y2 = s2 * (x1 + x2 + 2 * x3)
+	End Equations
+
+End Model
