@@ -28,8 +28,8 @@ variables = { 	'x1' : '10**(0.31)' 			, #
 
 # System equations (dx1 abbrev. dx1/dt )
 
-equations = {	'dx1' : '-k1 * x1 * u' 			, #
-		'dx2' : 'k1 * x1 * u - k2 * x2^2' 	, #
+equations = {	'dx1' : '-k1 * x1' 			, #
+		'dx2' : 'k1 * x1 - k2 * x2^2' 	, #
 		'dx3' : '-k3 * x3 + 0.5 * k2 * x2^2' 	, #
 		'dx4' : 'k3 * x3' 			  #
 }
@@ -39,11 +39,6 @@ equations = {	'dx1' : '-k1 * x1 * u' 			, #
 observables = { 'y1' : 's1 * (x2 + 2 * x3)' 		, #
 		'y2' : 's2 * (x1 + x2 + 2 * x3)'	  #
 }  
-
-# Further Functions
-
-functions = { 'u' : 'x4' 				  #
-}
 
 # Algebraic Constraints
 
