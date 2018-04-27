@@ -23,8 +23,8 @@ variables = { 	'x1' : 100 , # population of predators
 
 # System equations (dx1 abbrev. dx1/dt )
 
-equations = {	'dx1' : 'a * x2 * x1 - b * x1' ,
-		'dx2' : 'c * x2 - d * x * y'
+equations = {	'x1' : 'a * x2 * x1 - b * x1' ,
+		'x2' : 'c * x2 - d * x * y'
 }
 
 # Observables
